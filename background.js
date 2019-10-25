@@ -279,11 +279,11 @@ function processRequest(details) {
 // });
 
 
-// chrome.webRequest.onBeforeRequest.addListener(
-//     processRequest,
-//     {urls: ["<all_urls>"]},
-//     ["blocking"]
-// );
+chrome.webRequest.onBeforeRequest.addListener(
+    processRequest,
+    {urls: ["<all_urls>"]},
+    ["blocking"]
+);
 
 chrome.runtime.onMessage.addListener(function(message, sender) {
 	tabIds.add(sender.tab.id);
