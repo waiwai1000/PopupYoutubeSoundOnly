@@ -66,6 +66,7 @@
     "tabs",
     "contextMenus",
     "webRequest",
+    "*://*/*",
     "webRequestBlocking"
   ],
   "default_locale": "en",
