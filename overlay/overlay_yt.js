@@ -1,10 +1,5 @@
 function checkForEmbeds() {
-  chrome.webRequest.onBeforeRequest.addListener(
-    processRequest,
-    {urls: ["<all_urls>"]},
-    ["blocking"]
-  );
-
+ 
 
   if(removeIcons)
     return;
@@ -30,6 +25,7 @@ function checkForEmbeds() {
 }
 
 function ytHomePageHandler(el) {
+ 
   if (el.classList.contains('popupvideo__overlay__wrapper')) return;
 
   let urlEl = el.querySelector('a.ytd-thumbnail');
@@ -118,7 +114,7 @@ chrome.runtime.onMessage.addListener(
         let url = request.url;
         
         let videoElement = document.getElementsByTagName('video')[0];
-        //  console.log(document.getElementsByTagName('video')[0]);
+      
 		videoElement.onloadeddata = makeSetAudioURL(videoElement, url);
 
 

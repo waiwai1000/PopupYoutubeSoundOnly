@@ -1,7 +1,12 @@
 let windowID = null;
 let tabID = null;
+var getaudio = false;
 
 const launchVideo = (url, pref, screen) => {
+
+getaudio = true;
+  
+  
   let getUrlFn = {
     "videoUrl": (url, type, cb) => { return cb(null, url); },
     "vimeo": getVimeoUrl,
@@ -14,6 +19,7 @@ const launchVideo = (url, pref, screen) => {
   //({changed: 'activate', domain: 'vimeo.com'});
   getUrlFn[domain](id, type, (err, videoUrl) => {
     if(pref.multiWindow || (!pref.multiWindow && windowID === null)) {
+      
       let top = screen.top;
       let left = screen.left;
       if (pref.defaultPosition === 0) {
@@ -63,8 +69,12 @@ const launchVideo = (url, pref, screen) => {
   });
 };
 
+
 browser.windows.onRemoved.addListener(id => {
+  
+
   if(windowID === id) {
+
     windowID = null;
     tabID = null;
   }
@@ -73,6 +83,8 @@ browser.windows.onRemoved.addListener(id => {
 //modify http header Referer to allow video play in iframe.
 //for example: https://www.youtube.com/watch?v=8SzFaEqbLRM
 browser.webRequest.onBeforeSendHeaders.addListener(
+  
+  
   event => {
     let found = false;
     for (var header of event.requestHeaders) {

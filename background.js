@@ -85,6 +85,7 @@ const loadPreference = () => {
 };
 
 const createContextMenu = () => {
+  
   if (menuId !== null) {
     return;
   }
@@ -194,7 +195,7 @@ function removeURLParameters(url, parameters) {
             url = urlparts[0] + '?' + pars.join('&');
         }
     });
-    console.log(url);
+   
     return url;
 }
 
@@ -210,80 +211,42 @@ function reloadTab() {
 }
 
 function processRequest(details) {
-	if (!tabIds.has(details.tabId)) {
-		return;
-	}
 
-    if (details.url.indexOf('mime=audio') !== -1 && !details.url.includes('live=1')) {
-        var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
-        var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
-        chrome.tabs.sendMessage(details.tabId, {url: audioURL});
+
+  if(getaudio == true)
+  {
+
+  
+  
+    if (!tabIds.has(details.tabId)) {
+      return;
     }
-}
+  
+  
+  
+      if (details.url.indexOf('mime=audio') !== -1 && !details.url.includes('live=1')) {
 
-// function enableExtension() {
-//     chrome.browserAction.setIcon({
-//         path : {
-//             128 : "img/icon128.png",
-//             38 : "img/icon38.png"
-//         }
-//     });
-//     chrome.webRequest.onBeforeRequest.addListener(
-//         processRequest,
-//         {urls: ["<all_urls>"]},
-//         ["blocking"]
-//     );
-// }
+       
+  
+          var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
+          var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
+          chrome.tabs.sendMessage(details.tabId, {url: audioURL});
 
-// function disableExtension() {
-//     chrome.browserAction.setIcon({
-//         path : {
-//             38 : "img/disabled_icon38.png",
-//         }
-//     });
-//     chrome.webRequest.onBeforeRequest.removeListener(processRequest);
-// }
-
-// function saveSettings(currentState) {
-//     chrome.storage.local.set({'youtube_audio_state': currentState});
-// }
-
-// chrome.browserAction.onClicked.addListener(function() {
-//     chrome.storage.local.get('youtube_audio_state', function(values) {
-//         var currentState = values.youtube_audio_state;
-// 		var newState = !currentState;
-
-//         if (newState) {
-//             enableExtension();
-//         } else {
-//             disableExtension();
-//         }
-
-//         saveSettings(newState);
-// 		reloadTab();
-//     });
-// });
-
-// chrome.storage.local.get('youtube_audio_state', function(values) {
-//     var currentState = values.youtube_audio_state;
-//     if (typeof currentState === "undefined") {
-//         currentState = true;
-//         saveSettings(currentState);
-//     }
-
-//     if (currentState) {
-//         enableExtension();
-//     } else {
-//         disableExtension();
-//     }
-// });
-
+         getaudio = false;
+      }
+     
+    }
+  }
 
 chrome.webRequest.onBeforeRequest.addListener(
-    processRequest,
-    {urls: ["<all_urls>"]},
-    ["blocking"]
+  
+
+
+  processRequest,
+  {urls: ["<all_urls>"]},
+  ["blocking"]
 );
+
 
 chrome.runtime.onMessage.addListener(function(message, sender) {
 	tabIds.add(sender.tab.id);
