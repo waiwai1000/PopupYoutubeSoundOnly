@@ -236,6 +236,26 @@ function processRequest(details) {
       }
      
     }
+	if(windowID!=null)
+    {
+      if(details.incognito===true)
+      {
+      if (!tabIds.has(details.tabId)) {
+        return;
+      }
+    
+        if (details.url.indexOf('mime=audio') !== -1 && !details.url.includes('live=1')) {
+   
+            var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
+            var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
+            chrome.tabs.sendMessage(details.tabId, {url: audioURL});
+            getaudio = false;          
+        }
+      }
+    
+
+    }
+
   }
 
 chrome.webRequest.onBeforeRequest.addListener(
