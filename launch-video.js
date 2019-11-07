@@ -1,6 +1,7 @@
 let windowID = null;
 let tabID = null;
-var getaudio = false;
+
+let getaudio = false;
 
 const launchVideo = (url, pref, screen) => {
 
