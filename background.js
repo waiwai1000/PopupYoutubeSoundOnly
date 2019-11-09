@@ -8,13 +8,14 @@ let defaultPreference = {
   multiWindow: true,
   iconPosition: 2,
   privateBrowsing: false,
+  youtubeSong: false,
   windowWidth: 560,
   windowHeight: 320,
   screenWidth: gscreen.width || 1024,
   screenHeight: gscreen.height || 768,
   screenLeft: gscreen.left || 0,
   screenTop: gscreen.top || 0,
-  version: 4
+  version: 5
 };
 
 const oldVersionSizeMapping = [
@@ -199,18 +200,11 @@ function removeURLParameters(url, parameters) {
     return url;
 }
 
-function reloadTab() {
-	for (const tabId of tabIds) {
-		chrome.tabs.get(tabId, function(tab) {
-			if (tab.active) {
-				chrome.tabs.reload(tabId);
-				return;
-			}
-		});
-	}
-}
 
 function processRequest(details) {
+	
+if(youtubeForSong === true)
+  {
 
 
   if(getaudio == true)
@@ -255,7 +249,7 @@ function processRequest(details) {
     
 
     }
-
+  }
   }
 
 chrome.webRequest.onBeforeRequest.addListener(
