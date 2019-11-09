@@ -2,7 +2,7 @@ let windowID = null;
 let tabID = null;
 
 let getaudio = false;
-
+var youtubeForSong = false;
 const launchVideo = (url, pref, screen) => {
 
 getaudio = true;
@@ -51,6 +51,15 @@ getaudio = true;
       if(pref.privateBrowsing) {
         setting.incognito = true;
       }
+      if(pref.youtubeSong)
+      {
+        youtubeForSong = true;
+      }
+      else
+      {
+        youtubeForSong = false;
+      }
+
       browser.windows.create(setting).then(windowInfo => {
         windowID = windowInfo.id;
         tabID = windowInfo.tabs[0].id;
