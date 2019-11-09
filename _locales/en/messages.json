@@ -83,6 +83,11 @@
 		"message": "Open popup window in private browsing (For this feature, you need enabling extensions in private windows)",
 		"description": ""
 	},
+	    "youtubeSong": {
+        "message": "Popup youtube window for song (Enable privateBrowsing feature for all Popup Playlist Video as Song, reduce network bandwidth)",
+        "description": ""
+    },
+
 	"windowWidth": {
 		"message": "Width",
 		"description": ""
